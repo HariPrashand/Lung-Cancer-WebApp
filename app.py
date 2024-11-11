@@ -152,7 +152,7 @@ if st.button("Predict"):
     stream = client.chat.completions.create(
         model="HuggingFaceH4/zephyr-7b-beta", 
         messages=messages, 
-        temperature=0.5,
+        temperature=0.7,
         max_tokens=1024,
         top_p=0.7,
         stream=True
