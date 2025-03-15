@@ -141,25 +141,34 @@ if st.button("Predict"):
     Long-term considerations: Any strategies or monitoring that may help this patient reduce future risks or stay on top of their health.
     Please ensure the recommendations are tailored to the risk level (Low, Moderate, or High Risk) and patient details."""
     
-    from huggingface_hub import InferenceClient
+    # from huggingface_hub import InferenceClient
 
-    client = InferenceClient(api_key="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")
+    # client = InferenceClient(api_key="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")
 
-    messages = [
-        { "role": "user", "content": s }
-    ]
+    # messages = [
+    #     { "role": "user", "content": s }
+    # ]
 
-    stream = client.chat.completions.create(
-        model="HuggingFaceH4/zephyr-7b-beta", 
-        messages=messages, 
-        temperature=0.7,
-        max_tokens=1024,
-        top_p=0.7,
-        stream=True
-    )
+    # stream = client.chat.completions.create(
+    #     model="HuggingFaceH4/zephyr-7b-beta", 
+    #     messages=messages, 
+    #     temperature=0.7,
+    #     max_tokens=1024,
+    #     top_p=0.7,
+    #     stream=True
+    # )
     
-    for chunk in stream:
-        result += chunk.choices[0].delta.content
+    # for chunk in stream:
+    #     result += chunk.choices[0].delta.content
+
+    from gradio_client import Client
+
+    client = Client("KingNish/Very-Fast-Chatbot")
+    result = client.predict(
+    		Query=s,
+    		api_name="/predict"
+    )
+
     st.write("\n")
     st.write("\n")
     st.write(f"### Recommendations from our side")
